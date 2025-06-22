@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lua Tools - Run & Auto Fix</title>
+  <link href="style.css" rel="stylesheet" />
+  <script src="https://unpkg.com/fengari-web/dist/fengari-web.js"></script>
+</head>
+<body>
+  <h1>Lua Tools - Run & Auto Fix</h1>
+  <textarea id="inputLua" placeholder="Tulis kode Lua kamu di sini..."></textarea>
+  <br />
+  <button onclick="runLua()">Jalankan</button>
+  <button onclick="copyCode()">Salin</button>
+  <button onclick="autoFix()">Perbaiki Otomatis</button>
+  <pre id="output"></pre>
+
+  <script src="script.js"></script>
+</body>
+</html>
