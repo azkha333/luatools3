@@ -1,3 +1,4 @@
+
 function runLua() {
   const kode = document.getElementById("inputLua").value;
   const output = document.getElementById("output");
@@ -11,7 +12,7 @@ function runLua() {
       ${kode}
     `)();
   } catch (e) {
-    output.textContent = `❌ Error:\n${e.message}`;
+    output.textContent = `❌ Error:\n${e.message || e.toString()}`;
   }
 }
 
@@ -32,16 +33,16 @@ function autoFix() {
 
   // Tambahkan "then" untuk baris if yang tidak punya
   code = code.split('\n').map(line => {
-    if (line.trim().match(/^if .+/) && !line.includes("then")) {
+    if (line.trim().match(/^if\s+[^t].*$/) && !line.includes("then")) {
       return line + " then";
     }
     return line;
   }).join('\n');
 
   // Ganti = jadi == di dalam kondisi if
-  code = code.replace(/if\s+(.*[^=])=([^=].*)\s+then/g, "if $1==$2 then");
+  code = code.replace(/if\s+([^=]+)=([^=]+)\s+then/g, "if $1==$2 then");
 
-  // Tambahkan end jika jumlah tidak seimbang
+  // Tambahkan end jika jumlah blok tidak seimbang
   const blockOpen = (code.match(/\b(if|function|do)\b/g) || []).length;
   const blockClose = (code.match(/\bend\b/g) || []).length;
   const diff = blockOpen - blockClose;
